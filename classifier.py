@@ -7,9 +7,6 @@ Author: Aymeric Damien
 Project: https://github.com/aymericdamien/TensorFlow-Examples/
 '''
 
-from Dataset import Dataset
-import utils
-
 import os
 import tensorflow as tf
 import numpy as np
@@ -25,6 +22,8 @@ LABELS_DICT = {
 }
 
 BATCH_SIZE = 32
+
+IMAGE_DIR = os.getcwd() + '/small_dataset'
 
 # Parameters
 learning_rate = 0.001
@@ -59,9 +58,9 @@ def getDataset():
     with tf.Session() as session:
         tf.initialize_all_variables().run()
 
-        for dirName in os.listdir(utils.image_dir):
+        for dirName in os.listdir(IMAGE_DIR):
             label = convLabels(dirName)
-            path = os.path.join(utils.image_dir, dirName)
+            path = os.path.join(IMAGE_DIR, dirName)
             for img in os.listdir(path):
                 img_path = os.path.join(path, img)
                 if os.path.isfile(img_path) and img.endswith('jpeg'):
